@@ -1,3 +1,6 @@
+module Main exposing (..)
+
+import Browser exposing (sandbox)
 import Html exposing (..)
 import Html.Events exposing (..)
 import Html.Attributes exposing (..)
@@ -8,8 +11,8 @@ type alias Model =
 type Msg =
   Message String
 
-model : Model
-model =
+initialModel : Model
+initialModel =
   Model "Hello this is state"
 
 update : Msg -> Model -> Model
@@ -25,9 +28,9 @@ view model =
     , div [] [ text model.message ]
     ]
 
-main =
-  beginnerProgram
-  { model = model
-  , view = view
-  , update = update
-  }
+main : Program () Model Msg
+main = Browser.sandbox
+       { init = initialModel
+       , view = view
+       , update = update
+       }
